@@ -1,0 +1,7 @@
+name: Kit
+version: '${project.version}'
+main: org.mcuni.kit.Kit
+api-version: 1.19
+authors: [ LewisMilburn, MCUniDev ]
+description: Kit is MCUni's unified plugin.
+website: https://mcuni.org
