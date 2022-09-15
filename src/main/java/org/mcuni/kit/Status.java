@@ -5,13 +5,15 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Status extends Kit {
+import static org.bukkit.Bukkit.getLogger;
+
+public class Status {
     String ServerID;
 
     public void initialise(String SID) {
         this.ServerID = SID;
         sendStatus("START");
-        getLogger().info("Init: Status.");
+        getLogger().info("[Kit][Status] Init: Status.");
     }
 
     public void shutdown() {
