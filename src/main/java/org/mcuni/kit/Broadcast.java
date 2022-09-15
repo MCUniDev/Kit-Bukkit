@@ -12,10 +12,10 @@ import java.util.TimerTask;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Broadcast {
-    int ServerID;
+    String ServerID;
     private String broadcasts;
 
-    public void initialise(int SID) {
+    public void initialise(String SID) {
         ServerID = SID;
         this.broadcasts = getBroadcast();
         broadcastTimer();

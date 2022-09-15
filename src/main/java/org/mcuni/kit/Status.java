@@ -8,9 +8,9 @@ import java.util.Scanner;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Status {
-    int ServerID;
+    String ServerID;
 
-    public void initialise(int SID) {
+    public void initialise(String SID) {
         this.ServerID = SID;
         sendStatus("START");
         getLogger().info("Init: Status.");
