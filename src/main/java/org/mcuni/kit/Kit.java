@@ -3,7 +3,11 @@ package org.mcuni.kit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Kit extends JavaPlugin {
+
+    int ServerID = 1;
+
     Bounty bounty = new Bounty();
+    Broadcast broadcast = new Broadcast();
     @Override
     public void onEnable() {
         getLogger().info("                                                                                \n" +
@@ -29,12 +33,14 @@ public final class Kit extends JavaPlugin {
                 "                                                                                \n" +
                 "                                                                                ");
         bounty.initialise();
+        broadcast.initialise(ServerID);
         getLogger().info("Loaded Kit.");
     }
 
     @Override
     public void onDisable() {
         bounty.shutdown();
+        broadcast.shutdown();
         getLogger().info("Disabled Kit.");
     }
 }
