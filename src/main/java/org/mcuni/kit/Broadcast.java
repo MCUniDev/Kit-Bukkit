@@ -13,10 +13,12 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class Broadcast {
     int ServerID;
+    private String broadcasts;
+
     public void initialise(int SID) {
         ServerID = SID;
-        String Broadcasts = getBroadcast();
-        broadcastTimer(Broadcasts);
+        this.broadcasts = getBroadcast();
+        broadcastTimer();
         getLogger().info("Init: Broadcast.");
     }
 
@@ -24,19 +26,19 @@ public class Broadcast {
         getLogger().info("Disabled: Broadcast.");
     }
 
-    private void broadcastTimer(String Broadcasts) {
+    private void broadcastTimer() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                doBroadcast(Broadcasts);
+                doBroadcast();
             }
         }, 2*60*1000, 2*60*1000);
     }
 
-    private void doBroadcast(String broadcasts) {
-        if (broadcasts != null) {
-            Bukkit.broadcastMessage("[MCUni Broadcast] > " + broadcasts);
+    private void doBroadcast() {
+        if (this.broadcasts != null) {
+            Bukkit.broadcastMessage("[MCUni Broadcast] > " + this.broadcasts);
         }
     }
 
