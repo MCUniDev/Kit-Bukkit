@@ -47,11 +47,13 @@ public class Broadcast {
             getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
             URL url = new URL("https://kit.mcuni.org/api/broadcast/"+ServerID+".json");
             Scanner s = new Scanner(url.openStream());
-            if (s.toString().equals("")) {
+            String BroadcastString = s.toString();
+            if (BroadcastString.equals("")) {
                 getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
                 return null;
             } else {
-                return s.toString();
+                getLogger().info("[Kit][Broadcast] Fetched: "+ s);
+                return BroadcastString;
             }
         }
         catch(IOException ex) {
