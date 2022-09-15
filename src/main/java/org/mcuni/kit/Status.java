@@ -23,7 +23,7 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/status/"+ServerID+".json?status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/status/"+ServerID+".json?status="+Status);
             new Scanner(url.openStream());
             getLogger().info("[Kit][Status] Sent Status Ping to MCUni Network.");
         }
