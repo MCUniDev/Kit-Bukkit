@@ -9,9 +9,7 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static org.bukkit.Bukkit.getLogger;
-
-public class Broadcast {
+public class Broadcast extends Kit {
     String ServerID;
     private String broadcasts;
 

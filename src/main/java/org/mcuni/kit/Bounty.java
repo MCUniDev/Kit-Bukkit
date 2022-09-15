@@ -1,8 +1,6 @@
 package org.mcuni.kit;
 
-import static org.bukkit.Bukkit.getLogger;
-
-public class Bounty {
+public class Bounty extends Kit {
     public void initialise() {
         getLogger().info("Init: Bounty.");
     }

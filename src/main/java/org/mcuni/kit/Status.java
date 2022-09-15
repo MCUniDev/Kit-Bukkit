@@ -5,9 +5,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static org.bukkit.Bukkit.getLogger;
-
-public class Status {
+public class Status extends Kit {
     String ServerID;
 
     public void initialise(String SID) {
