@@ -8,6 +8,7 @@ public final class Kit extends JavaPlugin {
 
     Bounty bounty = new Bounty();
     Broadcast broadcast = new Broadcast();
+    Status status = new Status();
     @Override
     public void onEnable() {
         getLogger().info("                                                                                \n" +
@@ -34,6 +35,7 @@ public final class Kit extends JavaPlugin {
                 "                                                                                ");
         bounty.initialise();
         broadcast.initialise(ServerID);
+        status.initialise(ServerID);
         getLogger().info("Loaded Kit.");
     }
 
@@ -41,6 +43,7 @@ public final class Kit extends JavaPlugin {
     public void onDisable() {
         bounty.shutdown();
         broadcast.shutdown();
+        status.shutdown();
         getLogger().info("Disabled Kit.");
     }
 }
