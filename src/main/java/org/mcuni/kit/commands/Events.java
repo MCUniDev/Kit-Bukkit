@@ -32,7 +32,7 @@ public class Events implements CommandExecutor {
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
                         break;
                     case "hungergames":
-                        Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The Hunger Games event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
+                        Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'Hunger Games' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
                         break;
                     case "murdermystery":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'Murder Mystery' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
