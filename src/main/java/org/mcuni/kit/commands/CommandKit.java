@@ -12,15 +12,15 @@ public class CommandKit implements CommandExecutor {
             if (args.length > 0) {
                 if (args[0].equals("help")) {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit]" + ChatColor.YELLOW + "/kit - Main command");
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit]" + ChatColor.YELLOW + "/kit help - Show enabled commands");
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit]" + ChatColor.YELLOW + "/kit modules - Show enabled modules");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit - Main command");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit help - Show enabled commands");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit modules - Show enabled modules");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
                 } else if (args[0].equals("modules")) {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Bounty, Broadcast, Config, Kit, Status");
                 }
             } else {
-                commandSender.sendMessage(ChatColor.GOLD + "[Kit] Running Kit version 1.0-SNAPSHOT for Minecraft 1.19.2");
+                commandSender.sendMessage(ChatColor.GOLD + "[Kit] Running MCUni-Kit version 1.0-SNAPSHOT for Minecraft 1.19.2");
                 commandSender.sendMessage(ChatColor.GOLD + "[Kit] Use /kit help for more commands");
             }
         }
