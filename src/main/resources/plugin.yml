@@ -9,3 +9,6 @@ commands:
   kit:
     description: Main command
     usage: /<command>
+  event:
+    description: Events command
+    usage: /<command>

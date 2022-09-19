@@ -38,9 +38,9 @@ public class Kit extends JavaPlugin implements Plugin {
                 "         @@@   @@@@   @@@,   #@@@@@@@@@   *@@@@@@@@@%   %@@@   @@@,  @@@        \n" +
                 "                                                                                \n" +
                 "                                                                                \n" +
-                "                                                                                ");
+                "BUILD 3");
         bounty.initialise();
-        broadcast.initialise(ServerID);
+        //broadcast.initialise(ServerID);
         carl.initialise();
         Bukkit.getServer().getPluginManager().registerEvents(carl, this);
         config.initialise();

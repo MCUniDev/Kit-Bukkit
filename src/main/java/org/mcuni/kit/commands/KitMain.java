@@ -10,17 +10,16 @@ public class KitMain implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (command.getName().equalsIgnoreCase("kit")) {
             if (args.length > 0) {
-                switch (args[0]) {
-                    case "help":
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit - Main command");
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit help - Show enabled commands");
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit modules - Show enabled modules");
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
-                        return true;
-                    case "modules":
-                        commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Bounty, Broadcast, Config, Kit, Status");
-                        return true;
+                if ("help".equals(args[0])) {
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit - Main command");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit help - Show enabled commands");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit modules - Show enabled modules");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
+                    return true;
+                } else if ("modules".equals(args[0])) {
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Bounty, Broadcast, Config, Kit, Status");
+                    return true;
                 }
             } else {
                 commandSender.sendMessage(ChatColor.GOLD + "[Kit] Running MCUni-Kit version 1.0-SNAPSHOT for Minecraft 1.19.2");
