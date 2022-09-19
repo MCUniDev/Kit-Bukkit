@@ -51,7 +51,7 @@ public class Broadcast {
                 getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
                 return null;
             } else {
-                getLogger().info("[Kit][Broadcast] Fetched: " + s);
+                getLogger().info("[Kit][Broadcast] Fetched: " + BroadcastString);
                 return BroadcastString;
             }
         }
