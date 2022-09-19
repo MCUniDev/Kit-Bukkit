@@ -16,6 +16,12 @@ public class Broadcast {
 
     public void initialise(String SID) {
         ServerID = SID;
+        broadcasts = getBroadcast();
+        if (broadcasts != null) {
+            doBroadcast(broadcasts);
+        } else {
+            getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
+        }
         broadcastTimer();
         getLogger().info("Init: Broadcast.");
     }
