@@ -16,7 +16,6 @@ public class Broadcast {
 
     public void initialise(String SID) {
         ServerID = SID;
-        this.broadcasts = getBroadcast();
         broadcastTimer();
         getLogger().info("Init: Broadcast.");
     }
@@ -30,14 +29,17 @@ public class Broadcast {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                doBroadcast();
+                broadcasts = getBroadcast();
+                if (broadcasts != null) {
+                    doBroadcast(broadcasts);
+                }
             }
         }, 2*60*1000, 2*60*1000);
     }
 
-    private void doBroadcast() {
-        if (this.broadcasts != null) {
-            Bukkit.broadcastMessage("[MCUni Broadcast] > " + this.broadcasts);
+    private void doBroadcast(String broadcasts) {
+        if (broadcasts != null) {
+            Bukkit.broadcastMessage("[MCUni Broadcast] > " + broadcasts);
         }
     }
 
