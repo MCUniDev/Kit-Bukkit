@@ -24,32 +24,33 @@ public class Events implements CommandExecutor {
                         commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/event thebridge - Send event start broadcast");
                         commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/event villagedefense - Send event start broadcast");
                         commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Events Help ------------");
-                        break;
+                        return true;
                     case "starting":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The event is starting soon. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "start":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "hungergames":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'Hunger Games' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "murdermystery":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'Murder Mystery' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "buildbattle":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'BuildBattle' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "thebridge":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'The Bridge' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                     case "villagedefense":
                         Bukkit.broadcastMessage(ChatColor.GOLD + "Event > " + ChatColor.YELLOW + "The 'Village Defense' event is now starting. Please join the Discord voice call. https://discord.gg/SCNRa3cQz9");
-                        break;
+                        return true;
                 }
             } else {
                 commandSender.sendMessage(ChatColor.GOLD + "[Kit] Event scheduler enabled.");
                 commandSender.sendMessage(ChatColor.GOLD + "[Kit] Use /event help for more commands.");
+                return true;
             }
         }
         return true;
