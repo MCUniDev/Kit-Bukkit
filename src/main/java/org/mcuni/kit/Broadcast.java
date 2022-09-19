@@ -1,6 +1,7 @@
 package org.mcuni.kit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +42,7 @@ public class Broadcast {
 
     private void doBroadcast(String broadcasts) {
         if (broadcasts != null) {
-            Bukkit.broadcastMessage("[MCUni Broadcast] > " + broadcasts);
+            Bukkit.broadcastMessage(ChatColor.GOLD + "[MCUni Broadcast] > " + ChatColor.YELLOW + broadcasts);
         }
     }
 
