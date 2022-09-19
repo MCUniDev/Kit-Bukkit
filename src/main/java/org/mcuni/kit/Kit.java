@@ -1,7 +1,8 @@
 package org.mcuni.kit;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcuni.kit.commands.CommandKit;
+import org.mcuni.kit.commands.Events;
+import org.mcuni.kit.commands.KitMain;
 
 public class Kit extends JavaPlugin {
 
@@ -39,7 +40,8 @@ public class Kit extends JavaPlugin {
         broadcast.initialise(ServerID);
         config.initialise();
         status.initialise(ServerID);
-        this.getCommand("kit").setExecutor(new CommandKit());
+        this.getCommand("kit").setExecutor(new KitMain());
+        this.getCommand("event").setExecutor(new Events());
         getLogger().info("Loaded Kit.");
     }
 
