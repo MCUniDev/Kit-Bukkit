@@ -32,9 +32,11 @@ public class Broadcast {
                 broadcasts = getBroadcast();
                 if (broadcasts != null) {
                     doBroadcast(broadcasts);
+                } else {
+                    getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
                 }
             }
-        }, 2*60*1000, 2*60*1000);
+        }, 30*60*1000, 30*60*1000);
     }
 
     private void doBroadcast(String broadcasts) {
