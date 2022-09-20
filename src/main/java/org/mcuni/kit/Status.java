@@ -8,9 +8,11 @@ import java.util.Scanner;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Status {
+    String NetworkID;
     String ServerID;
 
-    public void initialise(String SID) {
+    public void initialise(String SID, String NID) {
+        this.NetworkID = NID;
         this.ServerID = SID;
         sendStatus("START");
         getLogger().info("[Kit][Status] Init: Status.");
@@ -23,7 +25,7 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/api/status/"+ServerID+".json?status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/status/"+NetworkID+".php?"+ServerID+"status="+Status);
             new Scanner(url.openStream());
             getLogger().info("[Kit][Status] Sent Status Ping to MCUni Network.");
         }

@@ -6,9 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.Events;
 import org.mcuni.kit.commands.KitMain;
 
+import java.util.Objects;
+
 public class Kit extends JavaPlugin implements Plugin {
 
-    String ServerID = "PLYMOUTH";
+    String NetworkID = "PLYMOUTH";
+    String ServerID = "GAMES-EVENTS";
 
     Config config = new Config();
     Carl carl = new Carl();
@@ -40,13 +43,13 @@ public class Kit extends JavaPlugin implements Plugin {
                 "                                                                                \n" +
                 "BUILD 3");
         bounty.initialise();
-        //broadcast.initialise(ServerID);
+        broadcast.initialise(ServerID, NetworkID);
         carl.initialise();
         Bukkit.getServer().getPluginManager().registerEvents(carl, this);
         config.initialise();
-        status.initialise(ServerID);
-        this.getCommand("kit").setExecutor(new KitMain());
-        this.getCommand("event").setExecutor(new Events());
+        status.initialise(ServerID, NetworkID);
+        Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitMain());
+        Objects.requireNonNull(this.getCommand("event")).setExecutor(new Events());
         getLogger().info("Loaded Kit.");
     }
 

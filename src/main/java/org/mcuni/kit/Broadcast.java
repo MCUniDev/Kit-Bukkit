@@ -12,11 +12,13 @@ import java.util.TimerTask;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Broadcast {
+    String NetworkID;
     String ServerID;
     private String broadcasts;
 
-    public void initialise(String SID) {
-        ServerID = SID;
+    public void initialise(String SID, String NID) {
+        this.ServerID = SID;
+        this.NetworkID = NID;
         broadcastTimer();
         getLogger().info("Init: Broadcast.");
     }
@@ -31,7 +33,7 @@ public class Broadcast {
             @Override
             public void run() {
                 broadcasts = getBroadcast();
-                if (broadcasts != null) {
+                if (broadcasts != null && Bukkit.getOnlinePlayers().size() > 0) {
                     doBroadcast(broadcasts);
                 } else {
                     getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
@@ -49,15 +51,17 @@ public class Broadcast {
     public String getBroadcast() {
         try {
             getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
-            URL url = new URL("http://kit.mcuni.org/api/broadcast/"+ServerID+".json");
+            URL url = new URL("https://kit.mcuni.org/api/broadcast/"+NetworkID+"/"+ServerID+".json");
             Scanner s = new Scanner(url.openStream());
-            String BroadcastString = s.nextLine();
-            if (BroadcastString.equals("")) {
-                getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
-                return null;
-            } else {
-                getLogger().info("[Kit][Broadcast] Fetched: " + BroadcastString);
-                return BroadcastString;
+            if (s.hasNextLine()) {
+                String BroadcastString = s.nextLine();
+                if (BroadcastString.equals("")) {
+                    getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
+                    return null;
+                } else {
+                    getLogger().info("[Kit][Broadcast] Fetched: " + BroadcastString);
+                    return BroadcastString;
+                }
             }
         }
         catch(IOException ex) {
