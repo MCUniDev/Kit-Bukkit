@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class KitMain implements CommandExecutor {
+public class KitCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (command.getName().equalsIgnoreCase("kit")) {
@@ -18,7 +18,7 @@ public class KitMain implements CommandExecutor {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
                     return true;
                 } else if ("modules".equals(args[0])) {
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Bounty, Broadcast, Config, Kit, Status");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Carl, Broadcast, Kit, Status");
                     return true;
                 }
             } else {

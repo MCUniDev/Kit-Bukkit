@@ -8,14 +8,12 @@ import java.util.Scanner;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Status {
-    String NetworkID;
-    String ServerID;
 
-    public void initialise(String SID, String NID) {
-        this.NetworkID = NID;
-        this.ServerID = SID;
+    public Kit plugin;
+
+    public Status(Kit plugin) {
+        this.plugin = plugin;
         sendStatus("START");
-        getLogger().info("[Kit][Status] Init: Status.");
     }
 
     public void shutdown() {
@@ -25,9 +23,10 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/api/status/"+NetworkID+".php?"+ServerID+"status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"status="+Status);
             new Scanner(url.openStream());
-            getLogger().info("[Kit][Status] Sent Status Ping to MCUni Network.");
+            getLogger().info("Sent Status Ping to MCUni Network.");
+            getLogger().info("[DEBUG] https://kit.mcuni.org/api/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"status="+Status);
         }
         catch(IOException ex) {
             getLogger().severe("[Kit][Status] Fatal error.");

@@ -12,3 +12,11 @@ commands:
   event:
     description: Events command
     usage: /<command>
+permissions:
+  kit.admin:
+    description: Gives access to all Kit commands.
+    children:
+      kit.events: true
+  kit.events:
+    description: Gives access to events commands.
+    default: op

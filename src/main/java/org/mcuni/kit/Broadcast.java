@@ -9,25 +9,20 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import static org.bukkit.Bukkit.getLogger;
 
 public class Broadcast {
-    String NetworkID;
-    String ServerID;
+
+    public Kit plugin;
     private String broadcasts;
 
-    public void initialise(String SID, String NID) {
-        this.ServerID = SID;
-        this.NetworkID = NID;
-        broadcastTimer();
-        getLogger().info("Init: Broadcast.");
+    public Broadcast(Kit plugin) {
+        this.plugin = plugin;
+        Bukkit.getLogger().info("[MCUni-Kit][Broadcast] Broadcast module started.");
     }
 
-    public void shutdown() {
-        getLogger().info("Disabled: Broadcast.");
-    }
-
-    private void broadcastTimer() {
+    public void broadcastTimer() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -51,7 +46,8 @@ public class Broadcast {
     public String getBroadcast() {
         try {
             getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
-            URL url = new URL("https://kit.mcuni.org/api/broadcast/"+NetworkID+"/"+ServerID+".json");
+            URL url = new URL("https://kit.mcuni.org/api/broadcast/"+plugin.NetworkID+"/"+plugin.ServerID+".json");
+            getLogger().info("[DEBUG] https://kit.mcuni.org/api/broadcast/"+plugin.NetworkID+"/"+plugin.ServerID+".json");
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String BroadcastString = s.nextLine();

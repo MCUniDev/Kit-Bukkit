@@ -1,16 +1,18 @@
-package org.mcuni.kit;
+package org.mcuni.kit.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-
-import static org.bukkit.Bukkit.getLogger;
+import org.mcuni.kit.Kit;
 
 public class Carl implements Listener {
-    public void initialise() {
-        getLogger().info("Init: Carl.");
+    public Kit plugin;
+
+    public Carl(Kit plugin) {
+        this.plugin = plugin;
+        Bukkit.getLogger().info("[MCUni-Kit][Carl] Carl event handler started.");
     }
 
     @EventHandler
@@ -20,9 +22,5 @@ public class Carl implements Listener {
         } else if (player.getMessage().contains("kek")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
         }
-    }
-
-    public void shutdown() {
-        getLogger().info("Disabled: Carl.");
     }
 }
