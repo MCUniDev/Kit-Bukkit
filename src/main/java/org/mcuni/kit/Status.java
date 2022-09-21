@@ -13,12 +13,6 @@ public class Status {
 
     public Status(Kit plugin) {
         this.plugin = plugin;
-        sendStatus("START");
-    }
-
-    public void shutdown() {
-        sendStatus("STOP");
-        getLogger().info("Disabled: Status.");
     }
 
     public void sendStatus(String Status) {

@@ -18,6 +18,7 @@ public class Kit extends JavaPlugin {
     // Classes
     protected Broadcast broadcastClass;
     protected Carl carlClass;
+    protected Status statusClass;
     protected EventsCommands eventsCommandsClass;
     protected KitCommands kitCommandsClass;
 
@@ -29,6 +30,7 @@ public class Kit extends JavaPlugin {
         loadEventHandlers();
         loadCommands();
 
+        statusClass.sendStatus("START");
         broadcastClass.broadcastTimer();
     }
 
@@ -36,6 +38,7 @@ public class Kit extends JavaPlugin {
         new Metrics(this, 16474);
         broadcastClass = new Broadcast(this);
         carlClass = new Carl(this);
+        statusClass = new Status(this);
         eventsCommandsClass = new EventsCommands();
         kitCommandsClass = new KitCommands();
         Bukkit.getLogger().info("Loaded Classes.");
@@ -54,7 +57,7 @@ public class Kit extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown login.
+        statusClass.sendStatus("STOP");
     }
 
     public void showArt() {
