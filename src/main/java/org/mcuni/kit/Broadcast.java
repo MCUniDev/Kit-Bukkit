@@ -19,7 +19,7 @@ public class Broadcast {
 
     public Broadcast(Kit plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[MCUni-Kit][Broadcast] Broadcast module started.");
+        Bukkit.getLogger().info("[MCUni-Kit] Broadcast module started.");
     }
 
     public void broadcastTimer() {

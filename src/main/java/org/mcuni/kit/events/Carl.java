@@ -12,7 +12,7 @@ public class Carl implements Listener {
 
     public Carl(Kit plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[MCUni-Kit][Carl] Carl event handler started.");
+        Bukkit.getLogger().info("[MCUni-Kit] Carl event handler started.");
     }
 
     @EventHandler

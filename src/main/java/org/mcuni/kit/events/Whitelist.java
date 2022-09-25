@@ -19,7 +19,7 @@ public class Whitelist implements Listener {
 
     public Whitelist(Kit plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[MCUni-Kit][Carl] Carl event handler started.");
+        Bukkit.getLogger().info("[MCUni-Kit] Whitelist event handler started.");
     }
 
     @EventHandler(priority= EventPriority.HIGHEST)

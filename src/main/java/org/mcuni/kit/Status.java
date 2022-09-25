@@ -1,5 +1,7 @@
 package org.mcuni.kit;
 
+import org.bukkit.Bukkit;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ public class Status {
 
     public Status(Kit plugin) {
         this.plugin = plugin;
+        Bukkit.getLogger().info("[MCUni-Kit] Status module started.");
     }
 
     public void sendStatus(String Status) {

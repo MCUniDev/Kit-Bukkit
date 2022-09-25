@@ -15,7 +15,7 @@ public class Kit extends JavaPlugin {
 
     // Configs
     public String NetworkID = "PLYMOUTH";
-    public String ServerID = "TEST";
+    public String ServerID = "SURVIVAL";
 
     public FileConfiguration Config = this.getConfig();
 
@@ -58,7 +58,9 @@ public class Kit extends JavaPlugin {
 
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommands());
+        Bukkit.getLogger().info("Kit command executor registered.");
         Objects.requireNonNull(this.getCommand("event")).setExecutor(new EventsCommands());
+        Bukkit.getLogger().info("Event command executor registered.");
         Bukkit.getLogger().info("Registered Commands.");
     }
 
