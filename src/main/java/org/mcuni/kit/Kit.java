@@ -16,6 +16,8 @@ public class Kit extends JavaPlugin {
     // Configs
     public String NetworkID = "PLYMOUTH";
     public String ServerID = "SURVIVAL";
+    public String ServerNickname = "UOPMC";
+    public String UniversityName = "University of Plymouth";
 
     public FileConfiguration Config = this.getConfig();
 
