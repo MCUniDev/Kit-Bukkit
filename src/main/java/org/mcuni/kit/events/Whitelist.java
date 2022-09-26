@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.mcuni.kit.Kit;
 
 import java.io.IOException;
@@ -23,31 +23,35 @@ public class Whitelist implements Listener {
     }
 
     @EventHandler(priority= EventPriority.HIGHEST)
-    public void onJoin(PlayerLoginEvent event){
+    public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         if (!getUserInfo(player.getName(), String.valueOf(player.getUniqueId()))) {
-            player.kickPlayer("Welcome to UOPMC.\n"+
+            getLogger().info("[Kit][Whitelist] Kicked player '"+player.getName()+"'. Player is not registered.");
+            player.kickPlayer(ChatColor.GOLD+"Welcome to "+plugin.ServerNickname+".\n"+
+                    "\n"+
+                    ChatColor.YELLOW+"This server is only for students at "+plugin.UniversityName+".\n"+
                     "You'll need to verify that you're a student before you can play.\n"+
                     "\n"+
-                    "For more information please visit mcuni.org/verify");
+                    "To verify your account please visit mcuni.org/verify");
         } else {
+            getLogger().info("[Kit][Whitelist] Allowed player '"+player.getName()+"'. Player is registered.");
             Bukkit.broadcastMessage(ChatColor.GREEN + "Welcome back "+player.getDisplayName()+".");
         }
     }
 
     private boolean getUserInfo(String username, String uuid) {
         try {
-            getLogger().info("[Kit][Broadcast] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
+            getLogger().info("[Kit][Whitelist] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
             URL url = new URL("https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid);
             getLogger().info("[DEBUG] https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid);
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String response = s.nextLine();
                 if (response.equals("")) {
-                    getLogger().info("[Kit][Broadcast] There was no response from the server.");
+                    getLogger().info("[Kit][Whitelist] There was no response from the server.");
                     return false;
                 } else {
-                    getLogger().info("[Kit][Broadcast] Fetched: " + response);
+                    getLogger().info("[Kit][Whitelist] Fetched: " + response);
                     return response.equals("true");
                 }
             }
