@@ -20,10 +20,10 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/api/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"&status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/v1/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"&status="+Status);
             new Scanner(url.openStream());
             getLogger().info("Sent Status Ping to MCUni Network.");
-            getLogger().info("[DEBUG] https://kit.mcuni.org/api/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"&status="+Status);
+            getLogger().info("[DEBUG] https://kit.mcuni.org/api/v1/status/"+plugin.NetworkID+".php?"+plugin.ServerID+"&status="+Status);
         }
         catch(IOException ex) {
             getLogger().severe("[Kit][Status] Fatal error.");
