@@ -27,10 +27,10 @@ public class Whitelist implements Listener {
         Player player = event.getPlayer();
         if (!getUserInfo(player.getName(), String.valueOf(player.getUniqueId()))) {
             getLogger().info("[Kit][Whitelist] Kicked player '"+player.getName()+"'. Player is not registered.");
-            player.kickPlayer(ChatColor.GOLD+"Welcome to "+plugin.ServerNickname+".\n"+
+            player.kickPlayer(ChatColor.GOLD+""+ChatColor.BOLD+"Welcome to "+plugin.ServerNickname+".\n"+
                     "\n"+
-                    ChatColor.YELLOW+"This server is only for students at "+plugin.UniversityName+".\n"+
-                    "You'll need to verify that you're a student before you can play.\n"+
+                    ChatColor.RESET+""+ChatColor.YELLOW+"This server is only for students at "+plugin.UniversityName+".\n"+
+                    "You need to verify that you're a student before you can join.\n"+
                     "\n"+
                     "To verify your account please visit mcuni.org/verify");
         } else {
@@ -42,8 +42,8 @@ public class Whitelist implements Listener {
     private boolean getUserInfo(String username, String uuid) {
         try {
             getLogger().info("[Kit][Whitelist] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
-            URL url = new URL("https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid);
-            getLogger().info("[DEBUG] https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid);
+            URL url = new URL("https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid+"&network="+plugin.NetworkID);
+            getLogger().info("[DEBUG] https://kit.mcuni.org/api/v1/user.php?username="+username+"&uuid="+uuid+"&network="+plugin.NetworkID);
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String response = s.nextLine();
