@@ -35,7 +35,6 @@ public class Whitelist implements Listener {
                     "To verify your account please visit mcuni.org/verify");
         } else {
             getLogger().info("[Kit][Whitelist] Allowed player '"+player.getName()+"'. Player is registered.");
-            Bukkit.broadcastMessage(ChatColor.GREEN + "Welcome back "+player.getDisplayName()+".");
         }
     }
 
