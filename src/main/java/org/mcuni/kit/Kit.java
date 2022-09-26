@@ -3,7 +3,6 @@ package org.mcuni.kit;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcuni.kit.bStats.Metrics;
 import org.mcuni.kit.commands.EventsCommands;
 import org.mcuni.kit.commands.KitCommands;
 import org.mcuni.kit.events.Carl;
@@ -42,7 +41,6 @@ public class Kit extends JavaPlugin {
     }
 
     private void loadClasses() {
-        new Metrics(this, 16474);
         broadcastClass = new Broadcast(this);
         carlClass = new Carl(this);
         whitelistClass = new Whitelist(this);
