@@ -17,11 +17,13 @@ import static org.bukkit.Bukkit.getLogger;
 public class Whitelist implements Listener {
     public Kit plugin;
 
+    @Deprecated
     public Whitelist(Kit plugin) {
         this.plugin = plugin;
         Bukkit.getLogger().info("[MCUni-Kit] Whitelist event handler started.");
     }
 
+    @Deprecated
     @EventHandler(priority= EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
@@ -38,6 +40,7 @@ public class Whitelist implements Listener {
         }
     }
 
+    @Deprecated
     private boolean getUserInfo(String username, String uuid) {
         try {
             getLogger().info("[Kit][Whitelist] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
