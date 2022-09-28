@@ -13,6 +13,10 @@ public class Status {
 
     public Kit plugin;
 
+    /**
+     * Constructor for the Status class.
+     * @param plugin References to the main kit plugin class.
+     */
     public Status(Kit plugin) {
         this.plugin = plugin;
         Bukkit.getLogger().info("[MCUni-Kit] Status module started.");

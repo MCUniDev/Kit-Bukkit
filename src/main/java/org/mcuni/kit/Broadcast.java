@@ -17,11 +17,18 @@ public class Broadcast {
     public Kit plugin;
     private String broadcasts;
 
+    /**
+     * Constructor for the Broadcast class.
+     * @param plugin References to the main kit plugin class.
+     */
     public Broadcast(Kit plugin) {
         this.plugin = plugin;
         Bukkit.getLogger().info("[MCUni-Kit] Broadcast module started.");
     }
 
+    /**
+     * Broadcast timer class. Handles the broadcast timer and when broadcasts should be executed.
+     */
     public void broadcastTimer() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -37,6 +44,10 @@ public class Broadcast {
         }, 30*60*1000, 30*60*1000);
     }
 
+    /**
+     * Sends a broadcast to the server.
+     * @param broadcasts The message to be sent
+     */
     private void doBroadcast(String broadcasts) {
         if (broadcasts != null) {
             Bukkit.broadcastMessage(ChatColor.GOLD + "MCUni Broadcast > " + ChatColor.YELLOW + broadcasts);

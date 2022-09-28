@@ -17,12 +17,22 @@ import static org.bukkit.Bukkit.getLogger;
 public class Whitelist implements Listener {
     public Kit plugin;
 
+    /**
+     * Constructor for the Whitelist event class.
+     * @param plugin References to the main kit plugin class.
+     * @deprecated Does not work if MCUni Verify is installed on the proxy because it overrides Kit's functionality here.
+     */
     @Deprecated
     public Whitelist(Kit plugin) {
         this.plugin = plugin;
         Bukkit.getLogger().info("[MCUni-Kit] Whitelist event handler started.");
     }
 
+    /**
+     * Listener for if players join the server.
+     * @param event Catches the details of the event.
+     * @deprecated Does not work if MCUni Verify is installed on the proxy because it overrides Kit's functionality here.
+     */
     @Deprecated
     @EventHandler(priority= EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
@@ -40,6 +50,13 @@ public class Whitelist implements Listener {
         }
     }
 
+    /**
+     * API calls to fetch a user's information from the MCUni Kit server.
+     * @param username The player's username.
+     * @param uuid The player's unique user identification number.
+     * @return boolean True/false - should the user be allowed on the server or not.
+     * @deprecated Does not work if MCUni Verify is installed on the proxy because it overrides Kit's functionality here.
+     */
     @Deprecated
     private boolean getUserInfo(String username, String uuid) {
         try {

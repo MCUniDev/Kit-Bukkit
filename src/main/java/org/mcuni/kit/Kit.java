@@ -28,6 +28,9 @@ public class Kit extends JavaPlugin {
     protected EventsCommands eventsCommandsClass;
     protected KitCommands kitCommandsClass;
 
+    /**
+     * Plugin startup logic. This is called when the plugin is enabled during server startup.
+     */
     @Override
     public void onEnable() {
         showArt();
@@ -40,6 +43,9 @@ public class Kit extends JavaPlugin {
         broadcastClass.broadcastTimer();
     }
 
+    /**
+     * Loads the plugin's classes.
+     */
     private void loadClasses() {
         broadcastClass = new Broadcast(this);
         carlClass = new Carl(this);
@@ -50,12 +56,18 @@ public class Kit extends JavaPlugin {
         Bukkit.getLogger().info("Loaded Classes.");
     }
 
+    /**
+     * Loads and registers the plugin's event handlers.
+     */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
         Bukkit.getServer().getPluginManager().registerEvents(whitelistClass, this);
         Bukkit.getLogger().info("Registered Event Handlers.");
     }
 
+    /**
+     * Loads and registers the plugin's command handlers.
+     */
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommands());
         Bukkit.getLogger().info("Kit command executor registered.");
@@ -64,11 +76,17 @@ public class Kit extends JavaPlugin {
         Bukkit.getLogger().info("Registered Commands.");
     }
 
+    /**
+     * Plugin shutdown logic. This is called when the plugin is disabled during server shutdown.
+     */
     @Override
     public void onDisable() {
         statusClass.sendStatus("STOP");
     }
 
+    /**
+     * Shows some lovely art when the server is starting up.
+     */
     public void showArt() {
         getLogger().info("\n" +
                 "                                    ,///////,                                   \n" +

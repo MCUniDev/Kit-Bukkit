@@ -6,9 +6,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.mcuni.kit.Kit;
 
 public class EventsCommands implements CommandExecutor {
+    /**
+     * /event command handler.
+     * @param commandSender Information about who sent the command - player or console.
+     * @param command Information about what command was sent.
+     * @param s Command label - not used here.
+     * @param args The command's arguments.
+     * @return boolean true/false - was the command accepted and processed or not?
+     */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player player = (Player) commandSender;
