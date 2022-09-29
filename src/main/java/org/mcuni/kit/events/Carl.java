@@ -7,6 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.mcuni.kit.Kit;
 
+/**
+ * This class handles interception and parsing of player messages to respond "ew" if they send "pog" or "kek" in chat.
+ */
 public class Carl implements Listener {
     public Kit plugin;
 
@@ -30,6 +33,12 @@ public class Carl implements Listener {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
         } else if (player.getMessage().contains("kek")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
+        } else if (player.getMessage().contains("hello")) {
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
+        } else if (player.getMessage().contains("hi")) {
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
+        } else if (player.getMessage().contains("hey")) {
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
         }
     }
 }
