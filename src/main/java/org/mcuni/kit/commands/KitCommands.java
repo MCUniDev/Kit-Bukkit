@@ -5,6 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+/**
+ * Handles all /kit based commands.
+ */
 public class KitCommands implements CommandExecutor {
     /**
      * /kit command handler.
