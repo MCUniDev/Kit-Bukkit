@@ -36,6 +36,8 @@ public class Carl implements Listener {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
         } else if (message.contains("kek")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
+        } else if (message.contains("k3k")) {
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
         } else if (message.contains("hello")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
         } else if (message.contains("hi")) {
