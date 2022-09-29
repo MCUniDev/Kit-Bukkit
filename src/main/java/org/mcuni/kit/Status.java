@@ -27,10 +27,10 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/api/v2/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/v2/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
             new Scanner(url.openStream());
             getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
-            getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/v2/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
+            getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/v2/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
         }
         catch(IOException ex) {
             getLogger().severe("[Kit][Status] Fatal error.");

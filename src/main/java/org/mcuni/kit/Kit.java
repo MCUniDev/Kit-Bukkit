@@ -1,6 +1,7 @@
 package org.mcuni.kit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
@@ -14,13 +15,8 @@ import java.util.Objects;
  */
 public class Kit extends JavaPlugin {
 
-    // Configs
-    public String NetworkID = "PLYMOUTH";
-    public String ServerID = "SURVIVAL";
-    public String ServerNickname = "UOPMC";
-    public String UniversityName = "University of Plymouth";
-
-    public FileConfiguration Config = this.getConfig();
+    // Variables
+    public boolean shutdownPing = false;
 
     // Classes
     protected Broadcast broadcastClass;
@@ -32,19 +28,48 @@ public class Kit extends JavaPlugin {
 
     /**
      * Plugin startup logic. This is called when the plugin is enabled during server startup.
+     * Calls functions to load config, classes, event handlers, commands, and run startup actions.
+     * @see #loadConfig() Loads the configuration.
+     * @see #loadClasses() Loads all modules.
+     * @see #loadEventHandlers() Loads the event handlers.
+     * @see #loadCommands() Loads the commands.
+     * @see #startupActions() Runs the plugin's startup actions.
      */
     @Override
     public void onEnable() {
         showArt();
 
+        loadConfig();
         loadClasses();
         loadEventHandlers();
         loadCommands();
-
-        statusClass.sendStatus("START");
-        broadcastClass.broadcastTimer();
+        startupActions();
 
         Bukkit.getLogger().info("[MCUni-Kit] Completed startup.");
+    }
+
+    /**
+     * Loads the plugin's configuration
+     * @see #checkConfig()
+     */
+    private void loadConfig() {
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
+        checkConfig();
+    }
+
+    /**
+     * Checks that the plugin's configuration is filled out and working correctly.
+     */
+    private void checkConfig() {
+        if (getConfig().getString("NetworkID").equals("") ||
+                getConfig().getString("ServerID").equals("") ||
+                getConfig().getString("APIKey").equals("")) {
+            Bukkit.getLogger().severe("[MCUni-Kit] Required configuration values are empty. Please complete the configuration before continuing.");
+            shutdownPing = false;
+            getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     /**
@@ -80,17 +105,28 @@ public class Kit extends JavaPlugin {
     }
 
     /**
+     * Runs the plugin's startup actions once everything is loaded in.
+     */
+    private void startupActions() {
+        statusClass.sendStatus("START");
+        broadcastClass.broadcastTimer();
+    }
+
+    /**
      * Plugin shutdown logic. This is called when the plugin is disabled during server shutdown.
      */
     @Override
     public void onDisable() {
-        statusClass.sendStatus("STOP");
+        Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Goodbye!");
+        if (shutdownPing) {
+            statusClass.sendStatus("STOP");
+        }
     }
 
     /**
      * Shows some lovely art when the server is starting up.
      */
-    public void showArt() {
+    private void showArt() {
         getLogger().info("\n" +
                 "                                    ,///////,                                   \n" +
                 "                             //**//*////*////(/*////                            \n" +
@@ -109,6 +145,6 @@ public class Kit extends JavaPlugin {
                 "         @@@  @@@&@@  @@@   @@@@         @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@   @@@@   @@@    @@@@@@@@@    @@@@@@@@@    @@@   @@@   @@@        \n" +
                 "                                                                              \n" +
-                "         Now starting Kit-Bukkit by MCUni Version "+getDescription().getVersion()+"\n");
+                "         Now starting MCUni-Kit for Bukkit Version "+getDescription().getVersion()+"\n");
     }
 }

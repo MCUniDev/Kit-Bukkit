@@ -60,8 +60,8 @@ public class Broadcast {
     public String getBroadcast() {
         try {
             getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
-            URL url = new URL("https://kit.mcuni.org/api/v2/broadcast/"+plugin.NetworkID+"/"+plugin.ServerID+".json");
-            getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/v2/broadcast/"+plugin.NetworkID+"/"+plugin.ServerID+".json");
+            URL url = new URL("https://kit.mcuni.org/api/v2/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
+            getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/v2/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String BroadcastString = s.nextLine();

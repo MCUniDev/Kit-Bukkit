@@ -1,0 +1,13 @@
+# Kit configuration file.
+# Please modify this before running for the first time.
+
+#--------------------------------#
+#       SERVER INFORMATION       #
+#--------------------------------#
+NetworkID: ''
+ServerID: ''
+
+#--------------------------------#
+#         API CONNECTION         #
+#--------------------------------#
+APIKey: ''
