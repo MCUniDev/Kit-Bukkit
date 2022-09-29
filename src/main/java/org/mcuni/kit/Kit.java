@@ -108,6 +108,7 @@ public class Kit extends JavaPlugin {
                 "         @@@ @@@  @@@ @@@   @@@          @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@  @@@&@@  @@@   @@@@         @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@   @@@@   @@@    @@@@@@@@@    @@@@@@@@@    @@@   @@@   @@@        \n" +
-                "                                                                                \n");
+                "                                                                              \n" +
+                "         Now starting Kit-Bukkit by MCUni Version "+getDescription().getVersion()+"\n");
     }
 }
