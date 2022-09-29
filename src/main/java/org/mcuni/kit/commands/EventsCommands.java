@@ -7,6 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * Handles all /event based commands.
+ */
 public class EventsCommands implements CommandExecutor {
     /**
      * /event command handler.
