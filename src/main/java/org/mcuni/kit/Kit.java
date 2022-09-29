@@ -6,10 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
 import org.mcuni.kit.commands.KitCommands;
 import org.mcuni.kit.events.Carl;
-import org.mcuni.kit.events.Whitelist;
 
 import java.util.Objects;
 
+/**
+ * Main Kit class. Loads and enables all functionality.
+ */
 public class Kit extends JavaPlugin {
 
     // Configs
@@ -23,8 +25,8 @@ public class Kit extends JavaPlugin {
     // Classes
     protected Broadcast broadcastClass;
     protected Carl carlClass;
-    protected Whitelist whitelistClass;
     protected Status statusClass;
+    protected ItemManager itemManagerClass;
     protected EventsCommands eventsCommandsClass;
     protected KitCommands kitCommandsClass;
 
@@ -41,6 +43,8 @@ public class Kit extends JavaPlugin {
 
         statusClass.sendStatus("START");
         broadcastClass.broadcastTimer();
+
+        Bukkit.getLogger().info("[MCUni-Kit] Completed startup.");
     }
 
     /**
@@ -49,11 +53,11 @@ public class Kit extends JavaPlugin {
     private void loadClasses() {
         broadcastClass = new Broadcast(this);
         carlClass = new Carl(this);
-        whitelistClass = new Whitelist(this);
+        itemManagerClass = new ItemManager(this);
         statusClass = new Status(this);
         eventsCommandsClass = new EventsCommands();
         kitCommandsClass = new KitCommands();
-        Bukkit.getLogger().info("Loaded Classes.");
+        Bukkit.getLogger().info("[MCUni-Kit] Loaded all Classes.");
     }
 
     /**
@@ -61,8 +65,7 @@ public class Kit extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
-        Bukkit.getServer().getPluginManager().registerEvents(whitelistClass, this);
-        Bukkit.getLogger().info("Registered Event Handlers.");
+        Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 
     /**
@@ -70,10 +73,10 @@ public class Kit extends JavaPlugin {
      */
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommands());
-        Bukkit.getLogger().info("Kit command executor registered.");
+        Bukkit.getLogger().info("[MCUni-Kit] Kit command executor registered.");
         Objects.requireNonNull(this.getCommand("event")).setExecutor(new EventsCommands());
-        Bukkit.getLogger().info("Event command executor registered.");
-        Bukkit.getLogger().info("Registered Commands.");
+        Bukkit.getLogger().info("[MCUni-Kit] Event command executor registered.");
+        Bukkit.getLogger().info("[MCUni-Kit] Registered Commands.");
     }
 
     /**
