@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import static org.bukkit.Bukkit.getLogger;
 
+/**
+ * This class handles sending status messages to MCUni's network operations center.
+ */
 public class Status {
 
     public Kit plugin;
@@ -24,10 +27,10 @@ public class Status {
 
     public void sendStatus(String Status) {
         try {
-            URL url = new URL("https://kit.mcuni.org/api/v1/status/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
+            URL url = new URL("https://kit.mcuni.org/api/v2/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
             new Scanner(url.openStream());
-            getLogger().info("Sent Status Ping to MCUni Network.");
-            getLogger().info("[DEBUG] https://kit.mcuni.org/api/v1/status/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
+            getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+            getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/v2/status.php?network="+plugin.NetworkID+"&server="+plugin.ServerID+"&status="+Status);
         }
         catch(IOException ex) {
             getLogger().severe("[Kit][Status] Fatal error.");
