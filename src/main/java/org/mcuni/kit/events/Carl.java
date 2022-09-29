@@ -29,15 +29,18 @@ public class Carl implements Listener {
      */
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent player) {
-        if (player.getMessage().contains("pog")) {
+        String message = player.getMessage().toLowerCase();
+        if (message.contains("pog")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
-        } else if (player.getMessage().contains("kek")) {
+        } else if (message.contains("p0g")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
-        } else if (player.getMessage().contains("hello")) {
+        } else if (message.contains("kek")) {
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > " + ChatColor.RED + "ew");
+        } else if (message.contains("hello")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
-        } else if (player.getMessage().contains("hi")) {
+        } else if (message.contains("hi")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
-        } else if (player.getMessage().contains("hey")) {
+        } else if (message.contains("hey")) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Hey!");
         }
     }
