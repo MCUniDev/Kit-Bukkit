@@ -2,8 +2,6 @@ package org.mcuni.kit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
 import org.mcuni.kit.commands.KitCommands;
@@ -49,6 +47,8 @@ public class Kit extends JavaPlugin {
 
         loadEventHandlers();
         loadCommands();
+
+        broadcastClass.broadcastTimer();
 
         Bukkit.getLogger().info("[MCUni-Kit] Completed startup.");
     }
@@ -96,7 +96,6 @@ public class Kit extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
-        Bukkit.getServer().getPluginManager().registerEvents(statusStartClass, this);
         Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 
@@ -120,15 +119,6 @@ public class Kit extends JavaPlugin {
         if (shutdownPing) {
             statusClass.sendStatus(0);
         }
-    }
-
-    /**
-     * Runs startup actions when the server has fully started
-     * @param type
-     */
-    @EventHandler
-    public void onServerLoaded(ServerLoadEvent type) {
-        broadcastClass.broadcastTimer();
     }
 
     /**
