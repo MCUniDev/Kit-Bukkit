@@ -68,9 +68,9 @@ public class Kit extends JavaPlugin {
      * Checks that the plugin's configuration is filled out and working correctly.
      */
     private void checkConfig() {
-        if (getConfig().getString("NetworkID").equals("") ||
-                getConfig().getString("ServerID").equals("") ||
-                getConfig().getString("APIKey").equals("")) {
+        if (getConfig().getString("NetworkID") == null ||
+                getConfig().getString("ServerID") == null ||
+                getConfig().getString("APIKey") == null) {
             Bukkit.getLogger().severe("[MCUni-Kit] Required configuration values are empty. Please complete the configuration before continuing.");
             shutdownPing = false;
             getServer().getPluginManager().disablePlugin(this);
