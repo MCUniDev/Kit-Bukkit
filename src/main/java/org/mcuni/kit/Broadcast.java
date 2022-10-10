@@ -26,6 +26,8 @@ public class Broadcast {
      */
     public Broadcast(Kit plugin) {
         this.plugin = plugin;
+        broadcasts = getBroadcast();
+        broadcastTimer();
         Bukkit.getLogger().info("[MCUni-Kit] Broadcast module started.");
     }
 
@@ -33,13 +35,18 @@ public class Broadcast {
      * Broadcast timer class. Handles the broadcast timer and when broadcasts should be executed.
      */
     public void broadcastTimer() {
+        Bukkit.getLogger().info("[MCUni-Kit][Broadcast] Broadcast timer started.");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 broadcasts = getBroadcast();
-                if (broadcasts != null && Bukkit.getOnlinePlayers().size() > 0) {
-                    doBroadcast(broadcasts);
+                if (broadcasts != null) {
+                    if (Bukkit.getOnlinePlayers().size() > 0) {
+                        doBroadcast(broadcasts);
+                    } else {
+                        getLogger().info("[Kit][Broadcast] No players online - not sending a broadcast.");
+                    }
                 } else {
                     getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
                 }

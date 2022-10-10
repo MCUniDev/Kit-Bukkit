@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Kit extends JavaPlugin {
 
     // Variables
-    public boolean shutdownPing = false;
+    public boolean shutdownPing = true;
     public String APIVersion = "v3";
 
     // Classes
@@ -47,8 +47,6 @@ public class Kit extends JavaPlugin {
 
         loadEventHandlers();
         loadCommands();
-
-        broadcastClass.broadcastTimer();
 
         Bukkit.getLogger().info("[MCUni-Kit] Completed startup.");
     }
@@ -96,6 +94,7 @@ public class Kit extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
+        Bukkit.getServer().getPluginManager().registerEvents(statusStartClass, this);
         Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 
