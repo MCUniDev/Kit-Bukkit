@@ -2,11 +2,13 @@ package org.mcuni.kit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
 import org.mcuni.kit.commands.KitCommands;
 import org.mcuni.kit.events.Carl;
+import org.mcuni.kit.events.StatusStart;
 
 import java.util.Objects;
 
@@ -17,10 +19,12 @@ public class Kit extends JavaPlugin {
 
     // Variables
     public boolean shutdownPing = false;
+    public String APIVersion = "v3";
 
     // Classes
     protected Broadcast broadcastClass;
     protected Carl carlClass;
+    protected StatusStart statusStartClass;
     protected Status statusClass;
     protected ItemManager itemManagerClass;
     protected EventsCommands eventsCommandsClass;
@@ -33,7 +37,6 @@ public class Kit extends JavaPlugin {
      * @see #loadClasses() Loads all modules.
      * @see #loadEventHandlers() Loads the event handlers.
      * @see #loadCommands() Loads the commands.
-     * @see #startupActions() Runs the plugin's startup actions.
      */
     @Override
     public void onEnable() {
@@ -41,9 +44,11 @@ public class Kit extends JavaPlugin {
 
         loadConfig();
         loadClasses();
+
+        statusClass.sendStatus(1);
+
         loadEventHandlers();
         loadCommands();
-        startupActions();
 
         Bukkit.getLogger().info("[MCUni-Kit] Completed startup.");
     }
@@ -80,6 +85,7 @@ public class Kit extends JavaPlugin {
         carlClass = new Carl(this);
         itemManagerClass = new ItemManager(this);
         statusClass = new Status(this);
+        statusStartClass = new StatusStart(this);
         eventsCommandsClass = new EventsCommands();
         kitCommandsClass = new KitCommands();
         Bukkit.getLogger().info("[MCUni-Kit] Loaded all Classes.");
@@ -90,6 +96,7 @@ public class Kit extends JavaPlugin {
      */
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
+        Bukkit.getServer().getPluginManager().registerEvents(statusStartClass, this);
         Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 
@@ -105,22 +112,23 @@ public class Kit extends JavaPlugin {
     }
 
     /**
-     * Runs the plugin's startup actions once everything is loaded in.
-     */
-    private void startupActions() {
-        statusClass.sendStatus("START");
-        broadcastClass.broadcastTimer();
-    }
-
-    /**
      * Plugin shutdown logic. This is called when the plugin is disabled during server shutdown.
      */
     @Override
     public void onDisable() {
         Bukkit.broadcastMessage(ChatColor.GREEN + "Carl > Goodbye!");
         if (shutdownPing) {
-            statusClass.sendStatus("STOP");
+            statusClass.sendStatus(0);
         }
+    }
+
+    /**
+     * Runs startup actions when the server has fully started
+     * @param type
+     */
+    @EventHandler
+    public void onServerLoaded(ServerLoadEvent type) {
+        broadcastClass.broadcastTimer();
     }
 
     /**
