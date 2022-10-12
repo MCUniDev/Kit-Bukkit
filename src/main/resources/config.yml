@@ -13,15 +13,16 @@ ServerContactName: 'MCUni Support'
 #     WHITELIST INFORMATION      #
 #--------------------------------#
 # The whitelist will allow anyone with a role greater than or equal to the one provided to connect
+# You can add multiple roles in CSV format (e.g. '5,7,10')
 # Whitelist roles:
 # 1 - Anybody
 # 2 - Members
 # 5 - Society Members
 # 7 - Server Team
-# 10 - MCUni Admins
+# 9 - MCUni Admins
 
 WhitelistOn: false
-WhitelistRoleRequired: '5'
+WhitelistRoles: '5'
 
 #--------------------------------#
 #         API CONNECTION         #

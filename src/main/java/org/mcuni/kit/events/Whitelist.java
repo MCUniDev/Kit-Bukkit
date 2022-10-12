@@ -10,6 +10,7 @@ import org.mcuni.kit.Kit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static org.bukkit.Bukkit.getLogger;
@@ -33,7 +34,7 @@ public class Whitelist implements Listener {
     @EventHandler(priority= EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
-        if (getUserInfo(player.getName(), String.valueOf(player.getUniqueId())) < plugin.getConfig().getInt("WhitelistRoleRequired")) {
+        if (!Objects.requireNonNull(plugin.getConfig().getString("WhitelistRoles")).contains(getUserInfo(player.getName(), String.valueOf(player.getUniqueId())))) {
             getLogger().info("[Kit][Whitelist] Kicked player '"+player.getName()+"'. Player is not registered.");
             player.kickPlayer(ChatColor.DARK_RED +"You're not whitelisted. "+ChatColor.RED+"This server is currently closed for a special event. Please contact your server team for more information.");
         } else {
@@ -47,7 +48,7 @@ public class Whitelist implements Listener {
      * @param uuid The player's unique user ID
      * @return Integer related to the user's MCUni role number.
      */
-    private int getUserInfo(String username, String uuid) {
+    private String getUserInfo(String username, String uuid) {
         try {
             getLogger().info("[Kit][Whitelist] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
             URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/whitelist.php?username="+username+"&uuid="+uuid+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey"));
@@ -56,10 +57,10 @@ public class Whitelist implements Listener {
                 String response = s.nextLine();
                 if (response.equals("")) {
                     getLogger().info("[Kit][Whitelist] There was no response from the server.");
-                    return 0;
+                    return "0";
                 } else {
                     getLogger().info("[Kit][Whitelist] Fetched: " + response);
-                    return Integer.parseInt(response);
+                    return response;
                 }
             }
         }
@@ -68,6 +69,6 @@ public class Whitelist implements Listener {
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
         getLogger().info("[DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/whitelist.php?username="+username+"&uuid="+uuid+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey"));
-        return 0;
+        return "0";
     }
 }
