@@ -66,6 +66,8 @@ public class EventsCommands implements CommandExecutor {
                     return true;
                 }
             }
+        } else {
+            commandSender.sendMessage(ChatColor.DARK_RED + "[Kit] "+ChatColor.RED+"You don't have the required permissions to use this command.");
         }
         return true;
     }

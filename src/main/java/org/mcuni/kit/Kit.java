@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
 import org.mcuni.kit.commands.HelpCommands;
 import org.mcuni.kit.commands.KitCommands;
+import org.mcuni.kit.commands.WhitelistCommands;
 import org.mcuni.kit.events.Carl;
 import org.mcuni.kit.events.StatusStart;
 import org.mcuni.kit.events.Whitelist;
@@ -19,6 +20,7 @@ public class Kit extends JavaPlugin {
 
     // Variables
     public boolean shutdownPing = true;
+    public boolean WhitelistOn;
     public String APIVersion = "v3";
 
     // Classes
@@ -61,6 +63,8 @@ public class Kit extends JavaPlugin {
         saveDefaultConfig();
 
         checkConfig();
+
+        WhitelistOn = getConfig().getBoolean("WhitelistOn");
     }
 
     /**
@@ -103,9 +107,14 @@ public class Kit extends JavaPlugin {
      * Loads and registers the plugin's command handlers.
      */
     private void loadCommands() {
-        Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommands());
-        Objects.requireNonNull(this.getCommand("event")).setExecutor(new EventsCommands());
-        Objects.requireNonNull(this.getCommand("help")).setExecutor(new HelpCommands(this));
+        try {
+            this.getCommand("kit").setExecutor(new KitCommands());
+            this.getCommand("event").setExecutor(new EventsCommands());
+            this.getCommand("help").setExecutor(new HelpCommands(this));
+            this.getCommand("whitelist").setExecutor(new WhitelistCommands(this));
+        } catch (NullPointerException e) {
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable commands.");
+        }
         Bukkit.getLogger().info("[MCUni-Kit] Registered Command Executors.");
     }
 
@@ -131,6 +140,17 @@ public class Kit extends JavaPlugin {
                 "         @@@  @@@&@@  @@@   @@@@         @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@   @@@@   @@@    @@@@@@@@@    @@@@@@@@@    @@@   @@@   @@@        \n" +
                 "                                                                              \n" +
-                "         Now starting MCUni-Kit for Bukkit "+getDescription().getAPIVersion()+" - Version "+getDescription().getVersion()+"\n");
+                "         Now starting MCUni-Kit for Bukkit "+getDescription().getAPIVersion()+" - Version "+getDescription().getVersion()+"\n"+
+                " ");
+        getLogger().info("[MCUni-Kit] Loading configuration.");
+        getLogger().info("[MCUni-Kit] NETWORK: "+getConfig().getString("NetworkID"));
+        getLogger().info("[MCUni-Kit] SERVER: "+getConfig().getString("ServerID"));
+        String APIAccepted;
+        if (getConfig().getString("ServerID") != null) { APIAccepted = "Accepted"; } else { APIAccepted = "Declined"; }
+        getLogger().info("[MCUni-Kit] API KEY: "+APIAccepted);
+        getLogger().info("[MCUni-Kit] WHITELIST ON: "+getConfig().getBoolean("WhitelistOn"));
+        getLogger().info("[MCUni-Kit] WHITELIST ROLES: "+getConfig().getString("WhitelistRoles"));
+        getLogger().info("[MCUni-Kit] SERVER CONTACT EMAIL: "+getConfig().getString("ServerContactEmail"));
+        getLogger().info("[MCUni-Kit] SERVER CONTACT NAME: "+getConfig().getString("ServerContactName"));
     }
 }

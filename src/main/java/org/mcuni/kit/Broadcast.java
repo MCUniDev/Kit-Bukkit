@@ -67,7 +67,7 @@ public class Broadcast {
     public String getBroadcast() {
         try {
             getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
-            URL url = new URL("https://kit.mcuni.org/api/v2/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
+            URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String BroadcastString = s.nextLine();
@@ -84,7 +84,7 @@ public class Broadcast {
             getLogger().severe("[Kit][Broadcast] Fatal error.");
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
-        getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/v2/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
+        getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
         return null;
     }
 }

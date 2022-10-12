@@ -25,11 +25,13 @@ public class KitCommands implements CommandExecutor {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit - Main command");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit help - Show enabled commands");
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit modules - Show enabled modules");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit enabled - Show enabled features");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
                     return true;
-                } else if ("modules".equals(args[0])) {
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Carl, Broadcast, Kit, Status");
+                } else if ("enabled".equals(args[0])) {
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Modules Enabled: Broadcast, ItemManager, Kit, Status");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Event Handlers Enabled: Carl, StatusStart, Whitelist");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] Command Handlers Enabled: EventsCommands, HelpCommands, KitCommands, WhitelistCommands");
                     return true;
                 }
             } else {

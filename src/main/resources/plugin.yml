@@ -12,6 +12,12 @@ commands:
   event:
     description: Events command
     usage: /<command>
+  help:
+    description: Help command
+    usage: /<command>
+  whitelist:
+    description: Whitelist command
+    usage: /<command>
 permissions:
   kit.admin:
     description: Gives access to all Kit commands.

@@ -33,12 +33,16 @@ public class Whitelist implements Listener {
      */
     @EventHandler(priority= EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-        if (!Objects.requireNonNull(plugin.getConfig().getString("WhitelistRoles")).contains(getUserInfo(player.getName(), String.valueOf(player.getUniqueId())))) {
-            getLogger().info("[Kit][Whitelist] Kicked player '"+player.getName()+"'. Player is not on the whitelist.");
-            player.kickPlayer(ChatColor.DARK_RED +"You're not whitelisted. "+ChatColor.RED+"This server is currently closed for a special event. Please contact your server team for more information.");
+        if (plugin.WhitelistOn) {
+            Player player = event.getPlayer();
+            if (!Objects.requireNonNull(plugin.getConfig().getString("WhitelistRoles")).contains(getUserInfo(player.getName(), String.valueOf(player.getUniqueId())))) {
+                getLogger().info("[Kit][Whitelist] Kicked player '" + player.getName() + "'. Player is not on the whitelist.");
+                player.kickPlayer(ChatColor.DARK_RED + "You're not whitelisted. " + ChatColor.RED + "This server is currently closed for a special event. Please contact your server team for more information.");
+            } else {
+                getLogger().info("[Kit][Whitelist] Allowed player '" + player.getName() + "'. Player is on the whitelist.");
+            }
         } else {
-            getLogger().info("[Kit][Whitelist] Allowed player '"+player.getName()+"'. Player is on the whitelist.");
+            getLogger().info("[Kit][Whitelist] The whitelist is not switched on, not checking user.");
         }
     }
 
