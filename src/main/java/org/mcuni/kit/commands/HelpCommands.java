@@ -34,7 +34,6 @@ public class HelpCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (command.getName().equalsIgnoreCase("help")) {
-            commandSender.sendMessage(ChatColor.GOLD + "------------- Help -------------");
             if (args.length > 0) {
                 if ("contact".equals(args[0])) {
                     commandSender.sendMessage(ChatColor.GOLD + "------------- Help : Contact -------------");
