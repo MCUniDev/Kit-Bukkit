@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.EventsCommands;
+import org.mcuni.kit.commands.HelpCommands;
 import org.mcuni.kit.commands.KitCommands;
 import org.mcuni.kit.events.Carl;
 import org.mcuni.kit.events.StatusStart;
+import org.mcuni.kit.events.Whitelist;
 
 import java.util.Objects;
 
@@ -25,8 +27,7 @@ public class Kit extends JavaPlugin {
     protected StatusStart statusStartClass;
     protected Status statusClass;
     protected ItemManager itemManagerClass;
-    protected EventsCommands eventsCommandsClass;
-    protected KitCommands kitCommandsClass;
+    protected Whitelist whitelistClass;
 
     /**
      * Plugin startup logic. This is called when the plugin is enabled during server startup.
@@ -84,8 +85,7 @@ public class Kit extends JavaPlugin {
         itemManagerClass = new ItemManager(this);
         statusClass = new Status(this);
         statusStartClass = new StatusStart(this);
-        eventsCommandsClass = new EventsCommands();
-        kitCommandsClass = new KitCommands();
+        whitelistClass = new Whitelist(this);
         Bukkit.getLogger().info("[MCUni-Kit] Loaded all Classes.");
     }
 
@@ -95,6 +95,7 @@ public class Kit extends JavaPlugin {
     private void loadEventHandlers() {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
         Bukkit.getServer().getPluginManager().registerEvents(statusStartClass, this);
+        Bukkit.getServer().getPluginManager().registerEvents(whitelistClass, this);
         Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 
@@ -103,10 +104,9 @@ public class Kit extends JavaPlugin {
      */
     private void loadCommands() {
         Objects.requireNonNull(this.getCommand("kit")).setExecutor(new KitCommands());
-        Bukkit.getLogger().info("[MCUni-Kit] Kit command executor registered.");
         Objects.requireNonNull(this.getCommand("event")).setExecutor(new EventsCommands());
-        Bukkit.getLogger().info("[MCUni-Kit] Event command executor registered.");
-        Bukkit.getLogger().info("[MCUni-Kit] Registered Commands.");
+        Objects.requireNonNull(this.getCommand("help")).setExecutor(new HelpCommands(this));
+        Bukkit.getLogger().info("[MCUni-Kit] Registered Command Executors.");
     }
 
     /**
@@ -125,23 +125,12 @@ public class Kit extends JavaPlugin {
      */
     private void showArt() {
         getLogger().info("\n" +
-                "                                    ,///////,                                   \n" +
-                "                             //**//*////*////(/*////                            \n" +
-                "                             *%//////*///(/*//#####(                            \n" +
-                "                             ##//%%/*//((###%&##&%&/                            \n" +
-                "                             /##/#%%%#%%#%&&%&&%#%%/                            \n" +
-                "                             ((##(#((/(#%&%#%%%%%#%/                            \n" +
-                "                             #%((((%###%#%%%&%&%%%#/                            \n" +
-                "                             (#/##(###(/%%%%%%%#&%%(                            \n" +
-                "                                 .((#%/(%%%%&%%                                 \n" +
-                "                                       (%(                                      \n" +
-                "                                                                                \n" +
                 "         @@@@@@     @@@@@    @@@@@@@@@   @@@     @@@               @@@        \n" +
                 "         @@@@@@    @@@@@@   @@@@         @@@     @@@   @@@@@@@@               \n" +
                 "         @@@ @@@  @@@ @@@   @@@          @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@  @@@&@@  @@@   @@@@         @@@     @@@   @@@   @@@   @@@        \n" +
                 "         @@@   @@@@   @@@    @@@@@@@@@    @@@@@@@@@    @@@   @@@   @@@        \n" +
                 "                                                                              \n" +
-                "         Now starting MCUni-Kit for Bukkit Version "+getDescription().getVersion()+"\n");
+                "         Now starting MCUni-Kit for Bukkit "+getDescription().getAPIVersion()+" - Version "+getDescription().getVersion()+"\n");
     }
 }

@@ -6,6 +6,22 @@
 #--------------------------------#
 NetworkID: ''
 ServerID: ''
+ServerContactEmail: 'support@mcuni.org'
+ServerContactName: 'MCUni Support'
+
+#--------------------------------#
+#     WHITELIST INFORMATION      #
+#--------------------------------#
+# The whitelist will allow anyone with a role greater than or equal to the one provided to connect
+# Whitelist roles:
+# 1 - Anybody
+# 2 - Members
+# 5 - Society Members
+# 7 - Server Team
+# 10 - MCUni Admins
+
+WhitelistOn: false
+WhitelistRoleRequired: '5'
 
 #--------------------------------#
 #         API CONNECTION         #
