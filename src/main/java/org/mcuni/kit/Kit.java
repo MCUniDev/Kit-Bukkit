@@ -108,7 +108,7 @@ public class Kit extends JavaPlugin {
      */
     private void loadCommands() {
         try {
-            this.getCommand("kit").setExecutor(new KitCommands());
+            this.getCommand("kit").setExecutor(new KitCommands(this));
             this.getCommand("event").setExecutor(new EventsCommands());
             this.getCommand("help").setExecutor(new HelpCommands(this));
             this.getCommand("whitelist").setExecutor(new WhitelistCommands(this));
@@ -133,7 +133,8 @@ public class Kit extends JavaPlugin {
      * Shows some lovely art when the server is starting up.
      */
     private void showArt() {
-        getLogger().info("\n" +
+        getLogger().info(" \n" +
+                " \n" +
                 "         @@@@@@     @@@@@    @@@@@@@@@   @@@     @@@               @@@        \n" +
                 "         @@@@@@    @@@@@@   @@@@         @@@     @@@   @@@@@@@@               \n" +
                 "         @@@ @@@  @@@ @@@   @@@          @@@     @@@   @@@   @@@   @@@        \n" +

@@ -16,12 +16,12 @@ public class WhitelistCommands implements CommandExecutor {
     public Kit plugin;
 
     /**
-     * Constructor for the HelpCommands class.
+     * Constructor for the WhitelistCommands class.
      * @param plugin References to the main kit plugin class.
      */
     public WhitelistCommands(Kit plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[MCUni-Kit] HelpCommands class loaded.");
+        Bukkit.getLogger().info("[MCUni-Kit] WhitelistCommands class loaded.");
     }
 
     /**

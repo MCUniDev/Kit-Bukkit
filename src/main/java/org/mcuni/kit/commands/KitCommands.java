@@ -1,14 +1,28 @@
 package org.mcuni.kit.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.mcuni.kit.Kit;
 
 /**
  * Handles all /kit based commands.
  */
 public class KitCommands implements CommandExecutor {
+
+    public Kit plugin;
+
+    /**
+     * Constructor for the KitCommands class.
+     * @param plugin References to the main kit plugin class.
+     */
+    public KitCommands(Kit plugin) {
+        this.plugin = plugin;
+        Bukkit.getLogger().info("[MCUni-Kit] KitCommands class loaded.");
+    }
+
     /**
      * /kit command handler.
      * @param commandSender Information about who sent the command - player or console.
@@ -26,6 +40,10 @@ public class KitCommands implements CommandExecutor {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit - Main command");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit help - Show enabled commands");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/kit enabled - Show enabled features");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] ");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/help - Help system");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/event - Events system");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/whitelist - Whitelist system");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Kit Help ------------");
                     return true;
                 } else if ("enabled".equals(args[0])) {
@@ -35,7 +53,7 @@ public class KitCommands implements CommandExecutor {
                     return true;
                 }
             } else {
-                commandSender.sendMessage(ChatColor.GOLD + "[Kit] Running MCUni-Kit version 1.0-SNAPSHOT for Minecraft 1.19.2");
+                commandSender.sendMessage(ChatColor.GOLD + "[Kit] Running MCUni-Kit "+plugin.getDescription().getVersion()+" for Minecraft "+plugin.getDescription().getAPIVersion());
                 commandSender.sendMessage(ChatColor.GOLD + "[Kit] Use /kit help for more commands");
                 return true;
             }
