@@ -38,11 +38,9 @@ public class WhitelistCommands implements CommandExecutor {
         if (player.hasPermission("kit.whitelist")) {
             if (command.getName().equalsIgnoreCase("whitelist")) {
                 if (args.length > 0) {
-                    if ("temptoggle".equals(args[0])) {
+                    if ("tempon".equals(args[0])) {
                         if (plugin.WhitelistOn) {
-                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist has been disabled.");
-                            plugin.WhitelistOn = false;
-                            plugin.getConfig().set("WhitelistOn", false);
+                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already on.");
                         } else {
                             Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been enabled. Now enforcing.");
                             plugin.WhitelistOn = true;
@@ -52,6 +50,14 @@ public class WhitelistCommands implements CommandExecutor {
                             }
                         }
                         return true;
+                    } else if ("tempoff".equals(args[0])) {
+                        if (plugin.WhitelistOn) {
+                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been disabled.");
+                            plugin.WhitelistOn = false;
+                            plugin.getConfig().set("WhitelistOn", false);
+                        } else {
+                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already off.");
+                        }
                     }
                 } else {
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Whitelist ------------");
@@ -61,7 +67,9 @@ public class WhitelistCommands implements CommandExecutor {
                         commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "The whitelist is off.");
                     }
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ");
-                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/whitelist temptoggle - Temporarily toggle the whitelist (goes back to config on restart)");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/whitelist tempon - Temporarily turn the whitelist on");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "/whitelist tempoff - Temporarily turn the whitelist off");
+                    commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.YELLOW + "The whitelist will revert to config settings after a restart or reload ("+plugin.getConfig().getBoolean("WhitelistOn")+")");
                     commandSender.sendMessage(ChatColor.GOLD + "[Kit] ------------ Whitelist ------------");
                     return true;
                 }
