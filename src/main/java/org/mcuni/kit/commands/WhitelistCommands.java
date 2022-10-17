@@ -40,9 +40,9 @@ public class WhitelistCommands implements CommandExecutor {
                 if (args.length > 0) {
                     if ("tempon".equals(args[0])) {
                         if (plugin.WhitelistOn) {
-                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already on.");
+                            commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already on.");
                         } else {
-                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been enabled. Now enforcing.");
+                            commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been enabled. Now enforcing.");
                             plugin.WhitelistOn = true;
                             plugin.getConfig().set("WhitelistOn", true);
                             for (Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -52,11 +52,11 @@ public class WhitelistCommands implements CommandExecutor {
                         return true;
                     } else if ("tempoff".equals(args[0])) {
                         if (plugin.WhitelistOn) {
-                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been disabled.");
+                            commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.GREEN + "The whitelist has been disabled.");
                             plugin.WhitelistOn = false;
                             plugin.getConfig().set("WhitelistOn", false);
                         } else {
-                            Bukkit.broadcastMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already off.");
+                            commandSender.sendMessage(ChatColor.GOLD + "[Kit] " + ChatColor.RED + "The whitelist is already off.");
                         }
                     }
                 } else {
