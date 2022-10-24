@@ -33,7 +33,7 @@ public class HelpCommands implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if (command.getName().equalsIgnoreCase("help")) {
+        if (isHelpCommand(command)) {
             if (args.length > 0) {
                 if ("contact".equals(args[0])) {
                     commandSender.sendMessage(ChatColor.GOLD + "------------- Help : Contact -------------");
@@ -63,5 +63,21 @@ public class HelpCommands implements CommandExecutor {
             return true;
         }
         return true;
+    }
+
+    private boolean isHelpCommand(Command command) {
+        if (command.getName().equalsIgnoreCase("help")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("?")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("plugins")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("bukkit")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("plugins")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
