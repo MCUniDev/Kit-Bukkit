@@ -1,6 +1,8 @@
 # Kit
 MCUni's Network Management System
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MCUniDev/Kit-Bukkit/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MCUniDev/Kit-Bukkit/tree/main)
+
 ## Broadcast
 Broadcast fetches network broadcast messages from MCUni's network control centre.
 
