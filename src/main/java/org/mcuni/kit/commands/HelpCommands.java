@@ -49,8 +49,9 @@ public class HelpCommands implements CommandExecutor {
                     commandSender.sendMessage(ChatColor.GOLD + "------------ Help : Technical ------------");
                 } else if ("plugins".equals(args[0])) {
                     commandSender.sendMessage(ChatColor.GOLD + "------------- Help : Plugins -------------");
-                    commandSender.sendMessage(ChatColor.YELLOW + "Land claiming: https://uopmc.com/help/land-claiming");
-                    commandSender.sendMessage(ChatColor.YELLOW + "The shop: https://uopmc.com/help/the-shop");
+                    commandSender.sendMessage(ChatColor.YELLOW + "Survival chunk claiming: https://uopmc.com/help/land-claiming");
+                    commandSender.sendMessage(ChatColor.YELLOW + "Survival shop: https://uopmc.com/help/the-shop");
+                    commandSender.sendMessage(ChatColor.YELLOW + "Creative plot claiming: https://uopmc.com/help/creative-plots");
                     commandSender.sendMessage(ChatColor.GOLD + "------------- Help : Plugins -------------");
                 }
             } else {
@@ -66,15 +67,23 @@ public class HelpCommands implements CommandExecutor {
     }
 
     private boolean isHelpCommand(Command command) {
-        if (command.getName().equalsIgnoreCase("help")) {
-            return true;
-        } else if (command.getName().equalsIgnoreCase("?")) {
-            return true;
-        } else if (command.getName().equalsIgnoreCase("plugins")) {
+        if (command.getName().equalsIgnoreCase("?")) {
             return true;
         } else if (command.getName().equalsIgnoreCase("bukkit")) {
             return true;
+        } else if (command.getName().equalsIgnoreCase("about")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("ver")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("version")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("pl")) {
+            return true;
         } else if (command.getName().equalsIgnoreCase("plugins")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("icanhasbukkit")) {
+            return true;
+        } else if (command.getName().equalsIgnoreCase("help")) {
             return true;
         } else {
             return false;
