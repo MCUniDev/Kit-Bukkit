@@ -3,15 +3,10 @@ package org.mcuni.kit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcuni.kit.commands.EventsCommands;
-import org.mcuni.kit.commands.HelpCommands;
-import org.mcuni.kit.commands.KitCommands;
-import org.mcuni.kit.commands.WhitelistCommands;
+import org.mcuni.kit.commands.*;
 import org.mcuni.kit.events.Carl;
 import org.mcuni.kit.events.StatusStart;
 import org.mcuni.kit.events.Whitelist;
-
-import java.util.Objects;
 
 /**
  * Main Kit class. Loads and enables all functionality.
@@ -111,6 +106,7 @@ public class Kit extends JavaPlugin {
             this.getCommand("kit").setExecutor(new KitCommands(this));
             this.getCommand("event").setExecutor(new EventsCommands());
             this.getCommand("help").setExecutor(new HelpCommands(this));
+            this.getCommand("map").setExecutor(new MapCommands(this));
             this.getCommand("whitelist").setExecutor(new WhitelistCommands(this));
         } catch (NullPointerException e) {
             Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable commands.");
