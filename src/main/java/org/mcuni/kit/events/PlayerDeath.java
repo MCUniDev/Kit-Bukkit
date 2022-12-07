@@ -33,18 +33,17 @@ public class PlayerDeath implements Listener {
      * @param event The event data.
      */
     @EventHandler(priority= EventPriority.HIGHEST)
-    public String onDeath(EntityDeathEvent event){
+    public String onPlayerDeath(EntityDeathEvent event){
         if (event.getEntityType() == EntityType.PLAYER) {
             Entity player = event.getEntity();
             String uuid = String.valueOf(player.getUniqueId());
-            String coordinates = String.valueOf(player.getLocation());
-            String world = String.valueOf(player.getWorld());
+            String location = String.valueOf(player.getLocation());
             String cause = String.valueOf(player.getLastDamageCause());
             try {
                 if (plugin.getConfig().getBoolean("LogAPICalls")) {
                     getLogger().info("[Kit][PlayerDeath] Sending death data for player '" + player.getName() + "' with UUID '" + player.getUniqueId() + "'.");
                 }
-                URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/death.php?key="+plugin.getConfig().getString("APIKey")+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&uuid="+uuid+"&coordinates="+coordinates+"&world="+world+"&cause="+cause);
+                URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/death.php?key="+plugin.getConfig().getString("APIKey")+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&uuid="+uuid+"&location="+location+"&cause="+cause);
                 Scanner s = new Scanner(url.openStream());
                 if (s.hasNextLine()) {
                     String response = s.nextLine();
@@ -66,7 +65,7 @@ public class PlayerDeath implements Listener {
                 getLogger().severe(Arrays.toString(ex.getStackTrace()));
             }
             if (plugin.getConfig().getBoolean("LogDebugInfo")) {
-                getLogger().info("[DEBUG] https://kit.mcuni.org/api/v3/death.php?key=" + plugin.getConfig().getString("APIKey") + "&network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&uuid=" + uuid + "&coordinates=" + coordinates + "&world=" + world + "&cause=" + cause);
+                getLogger().info("[DEBUG] https://kit.mcuni.org/api/v3/death.php?key=" + plugin.getConfig().getString("APIKey") + "&network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&uuid=" + uuid + "&location=" + location + "&cause=" + cause);
             }
         } else {
             if (plugin.getConfig().getBoolean("LogDebugInfo")) {

@@ -2,6 +2,7 @@ package org.mcuni.kit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.*;
 import org.mcuni.kit.events.Carl;
@@ -87,6 +88,7 @@ public class Kit extends JavaPlugin {
         statusClass = new Status(this);
         statusStartClass = new StatusStart(this);
         whitelistClass = new Whitelist(this);
+        playerDeathClass = new PlayerDeath(this);
         Bukkit.getLogger().info("[MCUni-Kit] Loaded all Classes.");
     }
 
