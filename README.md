@@ -21,3 +21,6 @@ Adds custom items, crafting and furnace recipes.
 
 ## Help
 A custom help system designed to hide security sensitive plugins whilst still directing users to useful help pages.
+
+## PlayerDeath
+A system that records a player's death location & cause and reports back to the player.
