@@ -34,7 +34,7 @@ public class Status {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://api.mcuni.org/v1/status/?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status=2");
+                    URL url = new URL("https://api.mcuni.org/"+plugin.APIVersion+"/status/?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status=2");
                     new Scanner(url.openStream());
                     getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
                 } catch (IOException ex) {
