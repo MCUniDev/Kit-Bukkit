@@ -1,5 +1,5 @@
 name: MCUni-Kit
-version: 1.4
+version: 1.5
 main: org.mcuni.kit.Kit
 api-version: 1.19
 authors: [ LewisMilburn, MCUniDev ]
