@@ -43,12 +43,12 @@ public class PlayerDeath implements Listener {
             String uuid = String.valueOf(player.getUniqueId());
             String location = String.valueOf(player.getLocation());
             EntityDamageEvent deathCause = player.getLastDamageCause();
-            String cause = "Unknown";
+            String cause;
             if (deathCause.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK ||
                     deathCause.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION ||
                     deathCause.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK) {
                 Entity entity = (((EntityDamageByEntityEvent)deathCause).getDamager());
-                if(entity instanceof Player) {
+                if (entity instanceof Player) {
                     Player killerPlayer = (Player)entity;
                     cause = "Murdered by " + killerPlayer.getName();
                 }
