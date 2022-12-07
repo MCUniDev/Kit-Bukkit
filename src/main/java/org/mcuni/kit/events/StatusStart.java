@@ -42,12 +42,16 @@ public class StatusStart implements Listener {
         try {
             URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
             new Scanner(url.openStream());
-            getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+            if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+            }
         }
         catch(IOException ex) {
             getLogger().severe("[Kit][Status] Fatal error.");
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
-        getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
+        if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+            getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/" + plugin.APIVersion + "/status.php?network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&key=" + plugin.getConfig().getString("APIKey") + "&status=" + Status);
+        }
     }
 }

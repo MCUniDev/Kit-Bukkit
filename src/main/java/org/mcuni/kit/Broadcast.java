@@ -45,10 +45,14 @@ public class Broadcast {
                     if (Bukkit.getOnlinePlayers().size() > 0) {
                         doBroadcast(broadcasts);
                     } else {
-                        getLogger().info("[Kit][Broadcast] No players online - not sending a broadcast.");
+                        if (plugin.getConfig().getBoolean("LogBroadcastInfo")) {
+                            getLogger().info("[Kit][Broadcast] No players online - not sending a broadcast.");
+                        }
                     }
                 } else {
-                    getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
+                    if (plugin.getConfig().getBoolean("LogBroadcastInfo")) {
+                        getLogger().info("[Kit][Broadcast] No pending messages - not sending a broadcast.");
+                    }
                 }
             }
         }, 30*60*1000, 30*60*1000);
@@ -66,16 +70,22 @@ public class Broadcast {
 
     public String getBroadcast() {
         try {
-            getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
+            if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                getLogger().info("[Kit][Broadcast] Fetched remote broadcasts.");
+            }
             URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String BroadcastString = s.nextLine();
                 if (BroadcastString.equals("")) {
-                    getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
+                    if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                        getLogger().info("[Kit][Broadcast] There are no remote broadcasts.");
+                    }
                     return null;
                 } else {
-                    getLogger().info("[Kit][Broadcast] Fetched: " + BroadcastString);
+                    if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                        getLogger().info("[Kit][Broadcast] Fetched: " + BroadcastString);
+                    }
                     return BroadcastString;
                 }
             }
@@ -84,7 +94,9 @@ public class Broadcast {
             getLogger().severe("[Kit][Broadcast] Fatal error.");
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
-        getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/broadcast/"+plugin.getConfig().getString("NetworkID")+"/"+plugin.getConfig().getString("ServerID")+".json");
+        if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+            getLogger().info("[Kit][Broadcast][DEBUG] https://kit.mcuni.org/api/" + plugin.APIVersion + "/broadcast/" + plugin.getConfig().getString("NetworkID") + "/" + plugin.getConfig().getString("ServerID") + ".json");
+        }
         return null;
     }
 }

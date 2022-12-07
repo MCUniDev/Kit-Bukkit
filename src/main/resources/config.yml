@@ -29,3 +29,11 @@ WhitelistRoles: '5'
 #         API CONNECTION         #
 #--------------------------------#
 APIKey: ''
+
+#--------------------------------#
+#        CONSOLE MESSAGES        #
+#--------------------------------#
+LogWhitelistInfo: true
+LogBroadcastInfo: true
+LogDebugInfo: false
+LogAPICalls: false

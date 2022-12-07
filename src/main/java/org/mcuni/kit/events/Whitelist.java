@@ -36,13 +36,19 @@ public class Whitelist implements Listener {
         if (plugin.WhitelistOn) {
             Player player = event.getPlayer();
             if (!Objects.requireNonNull(plugin.getConfig().getString("WhitelistRoles")).contains(getUserInfo(player.getName(), String.valueOf(player.getUniqueId())))) {
-                getLogger().info("[Kit][Whitelist] Kicked player '" + player.getName() + "'. Player is not on the whitelist.");
+                if (plugin.getConfig().getBoolean("LogWhitelistInfo")) {
+                    getLogger().info("[Kit][Whitelist] Kicked player '" + player.getName() + "'. Player is not on the whitelist.");
+                }
                 player.kickPlayer(ChatColor.DARK_RED + "You're not whitelisted. " + ChatColor.RED + "This server is currently closed for a special event. Please contact your server team for more information.");
             } else {
-                getLogger().info("[Kit][Whitelist] Allowed player '" + player.getName() + "'. Player is on the whitelist.");
+                if (plugin.getConfig().getBoolean("LogWhitelistInfo")) {
+                    getLogger().info("[Kit][Whitelist] Allowed player '" + player.getName() + "'. Player is on the whitelist.");
+                }
             }
         } else {
-            getLogger().info("[Kit][Whitelist] The whitelist is not switched on, not checking user.");
+            if (plugin.getConfig().getBoolean("LogWhitelistInfo")) {
+                getLogger().info("[Kit][Whitelist] The whitelist is not switched on, not checking user.");
+            }
         }
     }
 
@@ -54,16 +60,22 @@ public class Whitelist implements Listener {
      */
     private String getUserInfo(String username, String uuid) {
         try {
-            getLogger().info("[Kit][Whitelist] Fetching player data for user '"+username+"' with UUID '"+uuid+"'.");
+            if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                getLogger().info("[Kit][Whitelist] Fetching player data for user '" + username + "' with UUID '" + uuid + "'.");
+            }
             URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/whitelist.php?username="+username+"&uuid="+uuid+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey"));
             Scanner s = new Scanner(url.openStream());
             if (s.hasNextLine()) {
                 String response = s.nextLine();
                 if (response.equals("")) {
-                    getLogger().info("[Kit][Whitelist] There was no response from the server.");
+                    if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                        getLogger().info("[Kit][Whitelist] There was no response from the server.");
+                    }
                     return "0";
                 } else {
-                    getLogger().info("[Kit][Whitelist] Fetched: " + response);
+                    if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                        getLogger().info("[Kit][Whitelist] Fetched: " + response);
+                    }
                     return response;
                 }
             }
@@ -72,7 +84,9 @@ public class Whitelist implements Listener {
             getLogger().severe("[Kit][Whitelist] Fatal error.");
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
-        getLogger().info("[DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/whitelist.php?username="+username+"&uuid="+uuid+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey"));
+        if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+            getLogger().info("[DEBUG] https://kit.mcuni.org/api/" + plugin.APIVersion + "/whitelist.php?username=" + username + "&uuid=" + uuid + "&network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&key=" + plugin.getConfig().getString("APIKey"));
+        }
         return "0";
     }
 }

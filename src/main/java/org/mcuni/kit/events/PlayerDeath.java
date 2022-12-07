@@ -25,7 +25,7 @@ public class PlayerDeath implements Listener {
      */
     public PlayerDeath(Kit plugin) {
         this.plugin = plugin;
-        Bukkit.getLogger().info("[MCUni-Kit] Whitelist event handler started.");
+        Bukkit.getLogger().info("[MCUni-Kit] Player Death event handler started.");
     }
 
     /**
@@ -41,16 +41,22 @@ public class PlayerDeath implements Listener {
             String world = String.valueOf(player.getWorld());
             String cause = String.valueOf(player.getLastDamageCause());
             try {
-                getLogger().info("[Kit][PlayerDeath] Sending death data for player '"+player.getName()+"' with UUID '"+player.getUniqueId()+"'.");
+                if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                    getLogger().info("[Kit][PlayerDeath] Sending death data for player '" + player.getName() + "' with UUID '" + player.getUniqueId() + "'.");
+                }
                 URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/death.php?key="+plugin.getConfig().getString("APIKey")+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&uuid="+uuid+"&coordinates="+coordinates+"&world="+world+"&cause="+cause);
                 Scanner s = new Scanner(url.openStream());
                 if (s.hasNextLine()) {
                     String response = s.nextLine();
                     if (response.equals("")) {
-                        getLogger().info("[Kit][PlayerDeath] There was no response from the server.");
+                        if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                            getLogger().info("[Kit][PlayerDeath] There was no response from the server.");
+                        }
                         return "0";
                     } else {
-                        getLogger().info("[Kit][PlayerDeath] Returned: " + response);
+                        if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                            getLogger().info("[Kit][PlayerDeath] Returned: " + response);
+                        }
                         return response;
                     }
                 }
@@ -59,7 +65,13 @@ public class PlayerDeath implements Listener {
                 getLogger().severe("[Kit][PlayerDeath] Fatal error.");
                 getLogger().severe(Arrays.toString(ex.getStackTrace()));
             }
-            getLogger().info("[DEBUG] https://kit.mcuni.org/api/v3/death.php?key="+plugin.getConfig().getString("APIKey")+"&network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&uuid="+uuid+"&coordinates="+coordinates+"&world="+world+"&cause="+cause);
+            if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+                getLogger().info("[DEBUG] https://kit.mcuni.org/api/v3/death.php?key=" + plugin.getConfig().getString("APIKey") + "&network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&uuid=" + uuid + "&coordinates=" + coordinates + "&world=" + world + "&cause=" + cause);
+            }
+        } else {
+            if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+                getLogger().info("[DEBUG] Non-player entity died.");
+            }
         }
         return "0";
     }

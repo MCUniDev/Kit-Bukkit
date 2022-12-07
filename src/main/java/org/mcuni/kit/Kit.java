@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcuni.kit.commands.*;
 import org.mcuni.kit.events.Carl;
+import org.mcuni.kit.events.PlayerDeath;
 import org.mcuni.kit.events.StatusStart;
 import org.mcuni.kit.events.Whitelist;
 
@@ -22,6 +23,7 @@ public class Kit extends JavaPlugin {
     protected Broadcast broadcastClass;
     protected Carl carlClass;
     protected StatusStart statusStartClass;
+    protected PlayerDeath playerDeathClass;
     protected Status statusClass;
     protected ItemManager itemManagerClass;
     protected Whitelist whitelistClass;
@@ -95,6 +97,7 @@ public class Kit extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(carlClass, this);
         Bukkit.getServer().getPluginManager().registerEvents(statusStartClass, this);
         Bukkit.getServer().getPluginManager().registerEvents(whitelistClass, this);
+        Bukkit.getServer().getPluginManager().registerEvents(playerDeathClass, this);
         Bukkit.getLogger().info("[MCUni-Kit] Registered Event Handlers.");
     }
 

@@ -28,7 +28,7 @@ public class Status {
     }
 
     public void statusTimer() {
-        Bukkit.getLogger().info("[MCUni-Kit][Status] Broadcast timer started.");
+        Bukkit.getLogger().info("[MCUni-Kit][Status] Status timer started.");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -36,7 +36,9 @@ public class Status {
                 try {
                     URL url = new URL("https://api.mcuni.org/"+plugin.APIVersion+"/status/?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status=2");
                     new Scanner(url.openStream());
-                    getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+                    if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                        getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+                    }
                 } catch (IOException ex) {
                     getLogger().severe("[MCUni-Kit][Status] Fatal error.");
                     getLogger().severe(Arrays.toString(ex.getStackTrace()));
@@ -49,12 +51,16 @@ public class Status {
         try {
             URL url = new URL("https://kit.mcuni.org/api/"+plugin.APIVersion+"/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
             new Scanner(url.openStream());
-            getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+            if (plugin.getConfig().getBoolean("LogAPICalls")) {
+                getLogger().info("[MCUni-Kit][Status] Sent Status Ping to MCUni Network.");
+            }
         }
         catch(IOException ex) {
             getLogger().severe("[MCUni-Kit][Status] Fatal error.");
             getLogger().severe(Arrays.toString(ex.getStackTrace()));
         }
-        getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/"+plugin.APIVersion+"/status.php?network="+plugin.getConfig().getString("NetworkID")+"&server="+plugin.getConfig().getString("ServerID")+"&key="+plugin.getConfig().getString("APIKey")+"&status="+Status);
+        if (plugin.getConfig().getBoolean("LogDebugInfo")) {
+            getLogger().info("[MCUni-Kit][Status][DEBUG] https://kit.mcuni.org/api/" + plugin.APIVersion + "/status.php?network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&key=" + plugin.getConfig().getString("APIKey") + "&status=" + Status);
+        }
     }
 }
