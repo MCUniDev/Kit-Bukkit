@@ -28,6 +28,7 @@ public class Kit extends JavaPlugin {
     protected Status statusClass;
     protected ItemManager itemManagerClass;
     protected Whitelist whitelistClass;
+    protected Economy economyClass;
 
     /**
      * Plugin startup logic. This is called when the plugin is enabled during server startup.
@@ -89,6 +90,7 @@ public class Kit extends JavaPlugin {
         statusStartClass = new StatusStart(this);
         whitelistClass = new Whitelist(this);
         playerDeathClass = new PlayerDeath(this);
+        economyClass = new Economy(this);
         Bukkit.getLogger().info("[MCUni-Kit] Loaded all Classes.");
     }
 
