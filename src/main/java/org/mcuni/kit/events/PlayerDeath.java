@@ -89,10 +89,6 @@ public class PlayerDeath implements Listener {
             if (plugin.getConfig().getBoolean("LogDebugInfo")) {
                 getLogger().info("[DEBUG] https://kit.mcuni.org/api/v3/death.php?key=" + plugin.getConfig().getString("APIKey") + "&network=" + plugin.getConfig().getString("NetworkID") + "&server=" + plugin.getConfig().getString("ServerID") + "&uuid=" + uuid + "&location=" + location + "&cause=" + cause);
             }
-        } else {
-            if (plugin.getConfig().getBoolean("LogDebugInfo")) {
-                getLogger().info("[DEBUG] Non-player entity died.");
-            }
         }
         return "0";
     }
