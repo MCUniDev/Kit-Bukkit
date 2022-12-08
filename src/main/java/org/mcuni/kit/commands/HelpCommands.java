@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.mcuni.kit.Eco;
 import org.mcuni.kit.Kit;
 
 /**
@@ -53,6 +54,9 @@ public class HelpCommands implements CommandExecutor {
                     commandSender.sendMessage(ChatColor.YELLOW + "Survival shop: https://uopmc.com/help/the-shop");
                     commandSender.sendMessage(ChatColor.YELLOW + "Creative plot claiming: https://uopmc.com/help/creative-plots");
                     commandSender.sendMessage(ChatColor.GOLD + "------------- Help : Plugins -------------");
+                } else if ("economy".equals(args[0])) {
+                    Eco ecoClass = new Eco(plugin);
+                    ecoClass.GetBalances();
                 }
             } else {
                 commandSender.sendMessage(ChatColor.GOLD + "------------ Help : Main Menu ------------");
