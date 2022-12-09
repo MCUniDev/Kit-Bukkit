@@ -110,12 +110,29 @@ public class Kit extends JavaPlugin {
     private void loadCommands() {
         try {
             this.getCommand("kit").setExecutor(new KitCommands(this));
+        } catch (NullPointerException e) {
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable /kit command.");
+        }
+        try {
             this.getCommand("event").setExecutor(new EventsCommands());
+        } catch (NullPointerException e) {
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable /event command.");
+        }
+        try {
             this.getCommand("help").setExecutor(new HelpCommands(this));
+        } catch (NullPointerException e) {
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable /help command.");
+        }
+        try {
             this.getCommand("map").setExecutor(new MapCommands(this));
             this.getCommand("whitelist").setExecutor(new WhitelistCommands(this));
         } catch (NullPointerException e) {
-            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable commands.");
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable /map command.");
+        }
+        try {
+            this.getCommand("whitelist").setExecutor(new WhitelistCommands(this));
+        } catch (NullPointerException e) {
+            Bukkit.getLogger().severe("[MCUni-Kit] ERROR: Couldn't enable /whitelist command.");
         }
         Bukkit.getLogger().info("[MCUni-Kit] Registered Command Executors.");
     }
