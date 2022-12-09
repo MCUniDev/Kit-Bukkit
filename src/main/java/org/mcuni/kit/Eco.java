@@ -3,12 +3,9 @@ package org.mcuni.kit;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Collection;
 
 /**
  * This class handles the server's economy links.
@@ -30,7 +27,7 @@ public class Eco {
             plugin.getServer().getPluginManager().disablePlugin(plugin);
             return;
         }
-        GetBalances();
+        String[][] balances = GetBalances();
         Bukkit.getLogger().info("[MCUni-Kit] Eco module started.");
     }
 
@@ -46,22 +43,32 @@ public class Eco {
         return true;
     }
 
-    public void GetBalances() {
-        OfflinePlayer[] OfflinePlayers = Bukkit.getOfflinePlayers();
+    public String[][] GetBalances() {
+        try {
+            OfflinePlayer[] Players = Bukkit.getOfflinePlayers();
 
-        String[][] balances = new String[OfflinePlayers.length][1];
-        Bukkit.getLogger().info("[MCUni-Kit][Eco] Offline players: " + OfflinePlayer[0].getPlayer());
+            int i = 0;
 
-        int i=0;
-        for (i=0; i < OfflinePlayers.length ; i++) {
-            Player player = OfflinePlayers[i].getPlayer();
-            balances[i][0] = player.getName();
-            balances[i][1] = String.valueOf(eco.getBalance(player.getName()));
-            Bukkit.getLogger().info("[MCUni-Kit][Eco] Balances: " + Arrays.deepToString(balances));
+            String[][] balances = new String[Players.length][2];
+            Bukkit.getLogger().info("[MCUni-Kit][Eco] Offline players: " + Players[i].getUniqueId() + " Balance: " + eco.getBalance(Players[i]));
+
+            for (i = 0; i < Players.length; i++) {
+                Bukkit.getLogger().info("[MCUni-Kit][Eco] Player: " + i);
+                balances[i][0] = String.valueOf(Players[i].getUniqueId());
+                balances[i][1] = String.valueOf(eco.getBalance(Players[i]));
+                Bukkit.getLogger().info("[MCUni-Kit][Eco] Balances: " + Arrays.deepToString(balances));
+            }
+
+            if (i == 0) {
+                Bukkit.getLogger().info("[MCUni-Kit][Eco] No players offline");
+            }
+
+            return balances;
+
+        } catch (Exception e) {
+            Bukkit.getLogger().severe("[MCUni-Kit][Eco] Unable to get balances.");
+            e.printStackTrace();
         }
-
-        if (i==0) {
-            Bukkit.getLogger().info("[MCUni-Kit][Eco] No players offline");
-        }
+        return null;
     }
 }
